@@ -1,8 +1,8 @@
 {
   "kleurplaat": "kleurplaat.jpg",
   "sounds": [
-    { "file": "geluid1.mp3", "text": "Kleur het grootste cadeau groen." },
-    { "file": "geluid2.mp3", "text": "Kleur de ballon rood." },
+    { "file": "geluid1.mp3", "text": "Kleur de vliegende dino paars." },
+    { "file": "geluid2.mp3", "text": "Kleur de dino met 3 hoorns oranje." },
     { "file": "geluid3.mp3", "text": "Kleur het kleine cadeautje blauw." },
     { "file": "geluid4.mp3", "text": "Kleur de taart geel." },
     { "file": "geluid5.mp3", "text": "Kleur de kaarsjes oranje." },
