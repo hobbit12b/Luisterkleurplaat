@@ -39,10 +39,11 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: center; /* Horizontaal centreren */
-            align-items: center; /* Verticaal centreren in hun rij */
+            justify-content: center; /* Centraal uitlijnen van de knoppen */
+            align-items: center; /* Verticale centrering van knoppen binnen hun rij */
             gap: 15px;
             margin-bottom: 20px;
+            width: 100%; /* Zorg ervoor dat de container niet breder is dan het scherm */
         }
 
         .sound-button {
@@ -95,36 +96,28 @@
             max-width: 90%;
         }
 
+        /* In portrait mode */
         @media (orientation: portrait) {
-            .container {
-                flex-direction: column;
-            }
-
             .buttons {
                 flex-direction: row;
                 flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                width: 100%;
+                overflow-x: auto; /* Als er teveel knoppen zijn, kun je horizontaal scrollen */
+                justify-content: center; /* Centraal uitlijnen van knoppen */
             }
 
             .sound-button {
-                flex: 0 0 auto;
                 width: 60px;
                 height: 60px;
                 font-size: 24px;
             }
         }
 
+        /* In landscape mode */
         @media (orientation: landscape) {
-            .container {
-                flex-direction: column;
-            }
-
             .buttons {
                 flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center; /* Centraal uitlijnen in landschap */
+                flex-wrap: nowrap;
+                justify-content: center; /* Centraal uitlijnen van knoppen in landschap */
             }
 
             .sound-button {
