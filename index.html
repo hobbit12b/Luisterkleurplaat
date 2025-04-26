@@ -161,19 +161,19 @@
             const buttonsContainer = document.getElementById('buttons');
             const instruction = document.getElementById('instruction');
 
-            data.buttons.forEach((item, index) => {
+            data.sounds.forEach((item, index) => {
                 const button = document.createElement('button');
                 button.classList.add('sound-button');
                 button.textContent = index + 1;
 
-                const audio = new Audio(item.sound);
+                const audio = new Audio(item.file);
 
                 button.addEventListener('click', () => {
                     document.querySelectorAll('.sound-button').forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
                     audio.currentTime = 0;
                     audio.play();
-                    instruction.textContent = item.description;
+                    instruction.textContent = item.text;
                 });
 
                 buttonsContainer.appendChild(button);
