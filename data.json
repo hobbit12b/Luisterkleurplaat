@@ -1,13 +1,13 @@
 {
   "kleurplaat": "kleurplaat.jpg",
   "sounds": [
-    { "file": "geluid1.mp3", "text": "Kleur de vliegende dino paars." },
-    { "file": "geluid2.mp3", "text": "Kleur de dino met 3 hoorns oranje." },
+    { "file": "geluid1.mp3", "text": "kleur de vliegende dino paars." },
+    { "file": "geluid2.mp3", "text": "kleur de dino met 3 hoorns oranje." },
     { "file": "geluid3.mp3", "text": "kleur het lichaam van de dino in het ei geel en de schubben rood." },
-    { "file": "geluid4.mp3", "text": "Kleur de dino met de lange nek blauw en de buik geel." },
-    { "file": "geluid5.mp3", "text": "Kleur de dino linksonder bruin." },
-    { "file": "geluid6.mp3", "text": "Kleur de lava die uit de vulkaan komt rood." },
-    { "file": "geluid7.mp3", "text": "Kleur de dino die heel veel stekels heeft in met meerdere kleuren." },
-    { "file": "geluid8.mp3", "text": "Dit is de laatste knop. Kleur de kleurplaat verder af." }
+    { "file": "geluid4.mp3", "text": "kleur de dino met de lange nek blauw en de buik geel." },
+    { "file": "geluid5.mp3", "text": "kleur de dino linksonder bruin." },
+    { "file": "geluid6.mp3", "text": "kleur de lava die uit de vulkaan komt rood." },
+    { "file": "geluid7.mp3", "text": "kleur de dino die heel veel stekels heeft in met meerdere kleuren." },
+    { "file": "geluid8.mp3", "text": "dit is de laatste knop. kleur de kleurplaat verder af." }
   ]
 }
