@@ -1,129 +1,59 @@
-<style>
-    body {
-        margin: 0;
-        font-family: "Comic Sans MS", sans-serif;
-        background-color: #f0f8ff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        min-height: 100vh;
-        padding: 10px;
-        box-sizing: border-box;
-    }
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luisterkleurplaat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    h1 {
-        color: #ff3399;
-        font-size: 2.5em;
-        margin: 20px 0;
-        text-align: center;
-    }
+    <h1>Luisterkleurplaat</h1>
 
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 20px;
-        max-width: 100%;
-    }
+    <div class="container">
 
-    .buttons {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 20px;
-    }
+        <div class="buttons" id="buttons">
+            <!-- Knoppen worden hier geladen -->
+        </div>
 
-    .sound-button {
-        background-color: #fff;
-        border: 3px solid #ff3399;
-        border-radius: 50%;
-        width: 70px;
-        height: 70px;
-        font-size: 30px;
-        color: #ff3399;
-        cursor: pointer;
-        transition: transform 0.2s, background-color 0.2s;
-    }
+        <div class="coloring-page">
+            <img src="kleurplaat.jpg" alt="Kleurplaat">
+        </div>
 
-    .sound-button.active {
-        animation: bounce 0.5s;
-        background-color: #ff3399;
-        color: #fff;
-    }
+        <div class="instruction" id="instruction">
+            Klik op een knop om een opdracht te horen.
+        </div>
 
-    @keyframes bounce {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.2); }
-        100% { transform: scale(1); }
-    }
+    </div>
 
-    .coloring-page {
-        background-color: #fff;
-        padding: 10px;
-        border-radius: 15px;
-        max-width: 90vw;
-        box-sizing: border-box;
-    }
+    <script>
+        async function loadData() {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            const buttonsContainer = document.getElementById('buttons');
+            const instruction = document.getElementById('instruction');
 
-    .coloring-page img {
-        width: 100%;
-        height: auto;
-        max-height: 60vh;
-        border-radius: 10px;
-    }
+            data.buttons.forEach((item, index) => {
+                const button = document.createElement('button');
+                button.classList.add('sound-button');
+                button.textContent = index + 1;
 
-    .instruction {
-        margin-top: 15px;
-        background-color: #fff3f8;
-        padding: 10px 20px;
-        border-radius: 10px;
-        font-size: 1.2em;
-        color: #ff3399;
-        text-align: center;
-        max-width: 90%;
-    }
+                const audio = new Audio(item.sound);
 
-    @media (orientation: portrait) {
-        .container {
-            flex-direction: column;
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.sound-button').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    audio.currentTime = 0;
+                    audio.play();
+                    instruction.textContent = item.description;
+                });
+
+                buttonsContainer.appendChild(button);
+            });
         }
 
-        .buttons {
-            flex-direction: row;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            justify-content: flex-start;
-            width: 100%;
-        }
+        loadData();
+    </script>
 
-        .sound-button {
-            flex: 0 0 auto;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-        }
-    }
-
-    @media (orientation: landscape) {
-        .container {
-            flex-direction: column;
-        }
-
-        .buttons {
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .sound-button {
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-        }
-    }
-</style>
+</body>
+</html>
