@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luisterkleurplaat</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Comic Sans MS", sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        h1 {
+            color: #ff3399;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sound-button {
+            background-color: #fff;
+            border: 3px solid #ff3399;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 30px;
+            color: #ff3399;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .sound-button.active {
+            animation: bounce 0.5s;
+            background-color: #ff3399;
+            color: #fff;
+        }
+
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .coloring-page {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 15px;
+            max-width: 100%;
+        }
+
+        .coloring-page img {
+            width: 100%;
+            height: auto;
+            max-height: 60vh;
+            border-radius: 10px;
+        }
+
+        .instruction {
+            margin-top: 15px;
+            background-color: #fff3f8;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            color: #ff3399;
+        }
+
+        /* Portrait layout */
+        @media (orientation: portrait) {
+            .container {
+                flex-direction: column;
+            }
+
+            .buttons {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Luisterkleurplaat</h1>
+    <div class="container">
+        <div class="buttons" id="buttons-left"></div>
+        <div class="coloring-page">
+            <img id="kleurplaat" src="" alt="Kleurplaat">
+        </div>
+        <div class="buttons" id="buttons-right"></div>
+    </div>
+    <div class="instruction" id="instruction-text">
+        Druk op een knop om te starten
+    </div>
+
+    <script>
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('kleurplaat').src = data.kleurplaat;
+
+                const buttonsLeft = document.getElementById('buttons-left');
+                const buttonsRight = document.getElementById('buttons-right');
+
+                data.sounds.forEach((sound, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'sound-button';
+                    button.innerText = '▶';
+                    button.onclick = () => playSound(index);
+
+                    if (index < data.sounds.length / 2) {
+                        buttonsLeft.appendChild(button);
+                    } else {
+                        buttonsRight.appendChild(button);
+                    }
+                });
+
+                window.sounds = data.sounds;
+            });
+
+        let currentAudio = null;
+
+        function playSound(index) {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+
+            currentAudio = new Audio(window.sounds[index].file);
+            currentAudio.play();
+
+            document.getElementById('instruction-text').innerText = window.sounds[index].text;
+
+            document.querySelectorAll('.sound-button').forEach((btn, i) => {
+                btn.classList.remove('active');
+                if (i === index) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
